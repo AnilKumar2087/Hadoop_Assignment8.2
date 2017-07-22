@@ -1,0 +1,50 @@
+1) Concat
+
+student_details = LOAD '/home/acadgild/anil/Pig_Assignments/Student_details.txt' USING PigStorage(',')
+as (id:int, firstname:chararray, lastname:chararray, age:int, phone:chararray, city:chararray, gpa:int);
+
+student_name_concat = foreach student_details Generate CONCAT (firstname, lastname);
+
+dump student_name_concat ;
+
+2) Tokenize
+
+3) Sum
+
+4) Min
+
+student_group_all = Group student_details All;
+
+student_gpa_min = foreach student_group_all  Generate
+   (student_details.firstname, student_details.gpa), MIN(student_details.gpa);
+
+5) Max
+
+student_group_all = Group student_details All;
+
+student_gpa_max = foreach student_group_all  Generate
+   (student_details.firstname, student_details.gpa), MAX(student_details.gpa);
+
+6) Limit
+
+student_details = LOAD '/home/acadgild/anil/Pig_Assignments/Student_details.txt' USING PigStorage(',')
+as (id:int, firstname:chararray, lastname:chararray, age:int, phone:chararray, city:chararray, gpa:int);
+
+student_name_concat = foreach student_details Generate CONCAT (firstname, lastname);
+
+select_3 = limit student_name_concat 3;
+
+dump select_3 ;
+
+
+7) Store
+
+store student_name_concat into '/home/acadgild/anil/Pig_Assignments/student_name' USING PigStorage(',') ;
+
+8) Distinct
+
+unique_rec = Distinct student_name_concat ;
+
+9) Flatten
+
+10) IsEmpty
